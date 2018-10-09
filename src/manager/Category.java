@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
+	//Values
 	private static List<Category> categoryList = new ArrayList<Category>();
 	private String name;
 	private List<Product> productList= new ArrayList<Product>();
@@ -19,6 +20,13 @@ public class Category {
 		return name;
 	}
 	
+	static List<Category> getList() {
+		return categoryList;
+	}
+	
+	List<Product> getProductList(){
+		return productList;
+	}
 	//set values
 	void setName(String new_name) {
 		name = new_name;

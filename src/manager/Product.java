@@ -3,11 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
+	//Values
 	private static List<Product> productList = new ArrayList<Product>();
 	private String name;
 	private Category productCategory;
-	private int stock;
-	private int price;
+	private int stock = 0;
+	private int price = 0;
 	
 	//constructor
 	Product(String new_name, String new_category, int new_stock, int new_price){
@@ -25,7 +26,35 @@ public class Product {
 		return name;
 	}
 	
-	//set values
-	//methods
+	int getStock() {
+		return stock;
+	}
 	
+	int getPrice() {
+		return price;
+	}
+	
+	
+	static List<Product> getList(){
+		return productList;
+	}
+	
+	//set values
+	void setNewPrice(int new_price) {
+		price = new_price;
+	}
+	
+	//methods
+	boolean stockAvailable() {
+		return (stock > 0);
+	}
+	
+	boolean decreaseStock() {
+		boolean value = false;
+		if (stockAvailable()) {
+			stock--;
+			value = true;
+		}
+		return value;
+	}
 }
