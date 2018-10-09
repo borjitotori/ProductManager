@@ -1,5 +1,7 @@
 package manager;
 
+import java.util.Scanner;
+
 public class Main {
 	// functions for printing
 	
@@ -21,6 +23,10 @@ public class Main {
 		}
 	}
 	
+	static void printProduct(Product product) {
+		String p = product.getCategory()+": "+product.getName()+" Price:"+product.getPrice()+"$ Stock:"+product.getStock();
+		System.out.println(p);
+	}
 	
 	public static void main(String[] args) {
 		
@@ -50,13 +56,41 @@ public class Main {
 		
 		User test = new User("Santiago","santiago@gmail.es","Sads","qwerty",200);
 		
-		System.out.println(video.getProductList().get(0).getName());
-		printProducts(video);
-		//print categories
-		//print a product list
-		//print product Details
-		//buy a product
 		
+		while(true) {
+			boolean exit = false;
+			Scanner sc;
+			System.out.println("Menu \n1: Category List \n2: Browse Product \n3: Show All Products \n4: Log Out");
+			sc = new Scanner(System.in);
+			
+			switch(sc.nextLine()) {
+			case "1":
+				sc = new Scanner(System.in);
+				printCategories();
+				System.out.println("E: Exit");	
+					if(!(sc.nextLine().equals("E")||sc.nextLine().equals("e"))) {
+						//get the exception if the number is not valid or gets out of the length of the products
+						//fix for some reason this dosent work
+							int i = Integer.valueOf(sc.nextLine()) - 1;
+							printProducts(Category.getList().get(i));
+					}
+				
+				break;
+			case "2":
+				break;
+				
+			case "3":
+				break;
+				
+			case "4":
+				exit = true;
+				break;
+			}
+			
+			if(exit) {
+				break;
+			}
+		}
 		
 		
 	}

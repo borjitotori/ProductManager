@@ -34,6 +34,9 @@ public class Product {
 		return price;
 	}
 	
+	String getCategory() {
+		return productCategory.getName();
+	}
 	
 	static List<Product> getList(){
 		return productList;
