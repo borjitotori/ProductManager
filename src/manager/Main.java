@@ -1,10 +1,40 @@
 package manager;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
-	// functions for printing
+	// Input Functions
+
+	static int askNumber() {
+		Scanner scM;
+		int inputValue = 0;
+		boolean exit = false;
+		while (true) {
+			System.out.print("Insert a Number: ");
+			scM = new Scanner(System.in);
+			String input = scM.nextLine();
+			
+			try {
+				inputValue = Integer.valueOf(input);
+				exit = true;
+				
+			}catch(NumberFormatException e) {
+				System.out.println("Please Insert An integer Value");
+			}
+			
+			if(exit) {
+				break;
+			}
+		}
+		return inputValue;
+	}
 	
+	static void waitForInput() {
+		System.out.println("Press Any Key To Continue...");
+		new java.util.Scanner(System.in).nextLine();
+	}
+	//print Functions
 	static void printCategories() {	
 		for(int i = 0; i < Category.getList().size();i++) {
 			System.out.println(i+1 +": "+Category.getList().get(i).getName());
@@ -27,6 +57,44 @@ public class Main {
 		String p = product.getCategory()+": "+product.getName()+" Price:"+product.getPrice()+"$ Stock:"+product.getStock();
 		System.out.println(p);
 	}
+	// Sub Menu Functions
+	static void subMenuCategoryList(User id) {
+		int input;
+		int nCategories = Category.getNumberOfCategories();
+		int nProducts;
+		Category actualCategory;
+		Product actualProduct;
+		
+		//Select the category
+		printCategories();
+		System.out.println(nCategories + 1 +": Exit"); 		
+		input = askNumber();
+		
+		if(input <= nCategories && input > 0) {
+			actualCategory = Category.getList().get(input-1);
+			nProducts = actualCategory.getNumberOfProducts();
+			
+			//Select the product
+			printProducts(actualCategory);
+			System.out.println(actualCategory.getNumberOfProducts()+1 + ": Exit");
+			input = askNumber();
+			
+			if(input <= nProducts && input > 0) {
+				actualProduct = actualCategory.getProductList().get(input-1);
+				printProduct(actualProduct);
+				
+				System.out.println("Do you wish to buy the product? Yes:1 No:0");
+				input = askNumber();
+				if(input == 1 ) {
+					if(id.Purchase(actualProduct)) {
+						System.out.println("Product Purchase successfully");
+					}else {
+						System.out.println("Product Purchase Faliaure");
+					}
+				}
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
 		
@@ -46,7 +114,7 @@ public class Main {
 		
 		
 		Product home1 = new Product("Lamp","Home",30,35);
-		Product home2 = new Product("Shower","Home",60,20);
+		Product home2 = new Product("Shower","Home",60,20);         
 		Product home3 = new Product("Door","Home",10,30);
 		
 		Product music1 = new Product("The now now","Music",30,15);
@@ -54,48 +122,41 @@ public class Main {
 		Product music3 = new Product("Joytime II", "Music",14,15);
 		
 		
-		User test = new User("Santiago","santiago@gmail.es","Sads","qwerty",200);
+		User test = new User("Santiago","santiago@gmail.es","Sads","qwerty",100);
 		
 		
 		while(true) {
-			boolean exit = false;
-			Scanner sc;
-			System.out.println("Menu \n1: Category List \n2: Browse Product \n3: Show All Products \n4: Log Out");
-			sc = new Scanner(System.in);
+			// fix the scanner for
 			
-			switch(sc.nextLine()) {
-			case "1":
-				sc = new Scanner(System.in);
-				printCategories();
-				System.out.println("E: Exit");	
-					if(!(sc.nextLine().equals("E")||sc.nextLine().equals("e"))) {
-						//get the exception if the number is not valid or gets out of the length of the products
-						//fix for some reason this dosent work
-							int i = Integer.valueOf(sc.nextLine()) - 1;
-							printProducts(Category.getList().get(i));
-					}
-				
-				break;
-			case "2":
+			System.out.println(test.getWallet());
+			boolean exit = false;
+			int input;
+			System.out.println("Menu \n1: Category List \n2: Browse Product \n3: Show All Products \n4: Log Out");
+			input = askNumber();
+			
+			switch(input) {
+			case 1:
+				//Category List
+				subMenuCategoryList(test);
 				break;
 				
-			case "3":
+			case 2:
 				break;
 				
-			case "4":
+			case 3:
+				break;
+				
+			case 4:
 				exit = true;
 				break;
 			}
 			
+
 			if(exit) {
 				break;
 			}
+			
+			waitForInput();
 		}
-		
-		
 	}
-	/*Fixes
-	 * when you set a wrong category it fails
-	 * 
-	 * */
 }

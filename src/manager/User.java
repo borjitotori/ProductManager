@@ -23,6 +23,10 @@ public class User {
 		wallet = new_wallet;
 	}
 	//get values
+	int getWallet() {
+		return wallet;
+	}
+	
 	//set values
 	//methods
 	
@@ -33,7 +37,7 @@ public class User {
 	
 	boolean Purchase(Product product) {
 		boolean succes = false;
-		if(product.getPrice()<= wallet) {
+		if(product.getPrice() <= wallet) {
 			if (product.stockAvailable()) {
 				product.decreaseStock();
 				purchase.add(product);

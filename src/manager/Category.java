@@ -24,9 +24,20 @@ public class Category {
 		return categoryList;
 	}
 	
+	static int getNumberOfCategories() {
+		return categoryList.size();
+		
+	}
+	
+	int getNumberOfProducts() {
+		return productList.size();
+	}
+	
 	List<Product> getProductList(){
 		return productList;
 	}
+	
+	
 	//set values
 	void setName(String new_name) {
 		name = new_name;
@@ -64,6 +75,7 @@ public class Category {
 		return search;
 	}
 	
+
 	
 	
 }

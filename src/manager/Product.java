@@ -42,6 +42,7 @@ public class Product {
 		return productList;
 	}
 	
+	
 	//set values
 	void setNewPrice(int new_price) {
 		price = new_price;
