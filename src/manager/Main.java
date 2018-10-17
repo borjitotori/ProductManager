@@ -1,11 +1,11 @@
 package manager;
 
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
 	// Input Functions
 
+	@SuppressWarnings("resource")
 	static int askNumber() {
 		Scanner scM;
 		int inputValue = 0;
@@ -17,6 +17,7 @@ public class Main {
 			
 			try {
 				inputValue = Integer.valueOf(input);
+				System.out.println();
 				exit = true;
 				
 			}catch(NumberFormatException e) {
@@ -27,13 +28,16 @@ public class Main {
 				break;
 			}
 		}
+
 		return inputValue;
 	}
 	
+	@SuppressWarnings("resource")
 	static void waitForInput() {
 		System.out.println("Press Any Key To Continue...");
 		new java.util.Scanner(System.in).nextLine();
 	}
+	
 	//print Functions
 	static void printCategories() {	
 		for(int i = 0; i < Category.getList().size();i++) {
@@ -53,10 +57,11 @@ public class Main {
 		}
 	}
 	
-	static void printProduct(Product product) {
+	static void printProductDetails(Product product) {
 		String p = product.getCategory()+": "+product.getName()+" Price:"+product.getPrice()+"$ Stock:"+product.getStock();
 		System.out.println(p);
 	}
+	
 	// Sub Menu Functions
 	static void subMenuCategoryList(User id) {
 		int input;
@@ -81,8 +86,8 @@ public class Main {
 			
 			if(input <= nProducts && input > 0) {
 				actualProduct = actualCategory.getProductList().get(input-1);
-				printProduct(actualProduct);
-				
+				printProductDetails(actualProduct);
+				//buy the product
 				System.out.println("Do you wish to buy the product? Yes:1 No:0");
 				input = askNumber();
 				if(input == 1 ) {
@@ -96,6 +101,48 @@ public class Main {
 		}
 	}
 	
+	static void subMenuAllProducts(User id) {
+		Product actualProduct;
+		int input;
+		int nProducts = Product.getProductSize();
+		
+		printAllProducts();
+		System.out.println(nProducts + 1 +": Exit");
+		input = askNumber();
+		
+		if(0 < input && input <= nProducts) {
+			actualProduct = Product.getList().get(input);
+			printProductDetails(actualProduct);
+		
+			//buy the product
+			System.out.println("Do you wish to buy the product? Yes:1 No:0");
+			input = askNumber();
+			if(input == 1 ) {
+				if(id.Purchase(actualProduct)) {
+					System.out.println("Product Purchase successfully");
+				}else {
+					System.out.println("Product Purchase Faliaure");
+				}
+			}
+		}
+	}
+	
+ 	static void subMenuCompareProducts() {
+	}
+	
+ 	static void subMenuProfile(User id) {
+ 		System.out.println("Name: "+ id.getName() + " Email: "+id.getEmail() + " Wallet: "+id.getWallet()+"€");
+ 		System.out.println("Purchased Products");
+ 		for (int i = 0; i< id.getListSize();i++) {
+ 			if(id.getPurchaseList().get(i) != null) {
+ 				System.out.println(id.getPurchaseList().get(i).getCategory() + ": "+id.getPurchaseList().get(i).getName());
+ 			}
+ 			System.out.println();
+ 		}
+ 	}
+ 	
+ 	//main
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		Category book = new Category("Book");
@@ -122,16 +169,13 @@ public class Main {
 		Product music3 = new Product("Joytime II", "Music",14,15);
 		
 		
-		User test = new User("Santiago","santiago@gmail.es","Sads","qwerty",100);
+		User test = new User("Santiago","santiago@gmail.es","qwerty",100);
 		
 		
-		while(true) {
-			// fix the scanner for
-			
-			System.out.println(test.getWallet());
+		while(true) {			
 			boolean exit = false;
 			int input;
-			System.out.println("Menu \n1: Category List \n2: Browse Product \n3: Show All Products \n4: Log Out");
+			System.out.println("Menu \n1: Category List \n2: Show All Products \n3: Compare Products \n4: Profile \n5: Log Out");
 			input = askNumber();
 			
 			switch(input) {
@@ -141,12 +185,18 @@ public class Main {
 				break;
 				
 			case 2:
+				subMenuAllProducts(test);
 				break;
 				
 			case 3:
+				subMenuCompareProducts();
 				break;
 				
 			case 4:
+				subMenuProfile(test);
+				break;
+				
+			case 5:
 				exit = true;
 				break;
 			}
@@ -159,4 +209,6 @@ public class Main {
 			waitForInput();
 		}
 	}
+	// To Fix: don't return Lists;
+	// To Add: password Manager; the dollars; some file manager; test functions
 }

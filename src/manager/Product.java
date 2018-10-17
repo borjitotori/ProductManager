@@ -18,7 +18,9 @@ public class Product {
 		price = new_price;
 		productList.add(this);
 		productCategory = Category.getCategory(new_category);
-		productCategory.addProduct(this);
+		if(productCategory != null) {
+			productCategory.addProduct(this);
+		}
 	}
 	
 	//get values
@@ -40,6 +42,10 @@ public class Product {
 	
 	static List<Product> getList(){
 		return productList;
+	}
+	
+	static int getProductSize() {
+		return productList.size();
 	}
 	
 	
