@@ -6,24 +6,28 @@ every user can have a personal profile with name, credentials, wallet and list o
 
 ## Classes
 
-*Class Main*
+**Class Main*
+
 The Main Class contains the functions required to get information from the user, prints to console the different list of items (Products, Categories).
 
 Also contains the interface menu structure and the sub category menus.
 
 And for this test the declarations of the categories the products and some default users.
 
-*Class Category*
+**Class Category*
+
 Contains basic Category information, a list of the products contains in said class and a global static list of categories which contains all the categories created.
 
 also contains a couple of methods for getting a category from the global list and get a product from a specific category.
 
-*Class Product*
+**Class Product*
+
 Contains Product information, name, category, stock and price a list of products which contain all products created.
 
 and some methods to manipulate the products like A boolean to check if there is stock available and functions decrease and increase the stock.
 
-*Class User*
+**Class User*
+
 Contains user information, name, Email, password, wallet. List of products that the user has bought and also a list of all the users created.
 
 Methods for manipulating information of the user like purchasing products and adding founds.
