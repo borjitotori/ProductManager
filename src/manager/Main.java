@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Main {
 	// Input Functions
 
-	@SuppressWarnings("resource")
+	
 	static int askNumber() {
 		Scanner scM;
 		int inputValue = 0;
 		boolean exit = false;
 		while (true) {
-			System.out.print("Insert a Number: ");
+			System.out.print("Insert Number: ");
 			scM = new Scanner(System.in);
 			String input = scM.nextLine();
 			
@@ -27,15 +27,39 @@ public class Main {
 			if(exit) {
 				break;
 			}
+			scM.close();
 		}
 
 		return inputValue;
+	}
+	
+	static String askString() {
+		String input;
+		Scanner scM = new Scanner(System.in);
+		input = scM.nextLine();
+		
+		return input;
 	}
 	
 	@SuppressWarnings("resource")
 	static void waitForInput() {
 		System.out.println("Press Any Key To Continue...");
 		new java.util.Scanner(System.in).nextLine();
+	}
+	
+	//Manager functions
+	
+	static void buyProduct(User id, Product actualProduct) {
+		int input;
+		System.out.println("Do you wish to buy the product? Yes:1 No:0");
+		input = askNumber();
+		if(input == 1 ) {
+			if(id.Purchase(actualProduct)) {
+				System.out.println("Product Purchase successfully");
+			}else {
+				System.out.println("Product Purchase Faliaure");
+			}
+		}
 	}
 	
 	//print Functions
@@ -88,15 +112,7 @@ public class Main {
 				actualProduct = actualCategory.getProductList().get(input-1);
 				printProductDetails(actualProduct);
 				//buy the product
-				System.out.println("Do you wish to buy the product? Yes:1 No:0");
-				input = askNumber();
-				if(input == 1 ) {
-					if(id.Purchase(actualProduct)) {
-						System.out.println("Product Purchase successfully");
-					}else {
-						System.out.println("Product Purchase Faliaure");
-					}
-				}
+				buyProduct(id,actualProduct);
 			}
 		}
 	}
@@ -111,19 +127,11 @@ public class Main {
 		input = askNumber();
 		
 		if(0 < input && input <= nProducts) {
-			actualProduct = Product.getList().get(input);
+			actualProduct = Product.getList().get(input - 1);
 			printProductDetails(actualProduct);
-		
+
 			//buy the product
-			System.out.println("Do you wish to buy the product? Yes:1 No:0");
-			input = askNumber();
-			if(input == 1 ) {
-				if(id.Purchase(actualProduct)) {
-					System.out.println("Product Purchase successfully");
-				}else {
-					System.out.println("Product Purchase Faliaure");
-				}
-			}
+			buyProduct(id,actualProduct);
 		}
 	}
 	
@@ -151,52 +159,76 @@ public class Main {
 		Category music = new Category("Music");
 		
 		
-		Product book1 = new Product("Ready player one","Book",100,20);
-		Product book2 = new Product("Hunger Games","Book",80,25);
-		Product book3 = new Product("El tipler","Book",500,30);
+		new Product("Ready player one","Book",100,20);
+		new Product("Hunger Games","Book",80,25);
+		new Product("El tipler","Book",500,30);
 		
-		Product video1 = new Product("the disappearance","Video",40,50);
-		Product video2 = new Product("Iron Man","Video",26,30);
-		Product video3 = new Product("V for vendetta","Video", 13, 40);
+		new Product("the disappearance","Video",40,50);
+		new Product("Iron Man","Video",26,30);
+		new Product("V for vendetta","Video", 13, 40);
+			
+		new Product("Lamp","Home",30,35);
+		new Product("Shower","Home",60,20);         
+		new Product("Door","Home",10,30);
+		
+		new Product("The now now","Music",30,15);
+		new Product("Blurry face","Music",12,15);
+		new Product("Joytime II", "Music",14,15);
 		
 		
-		Product home1 = new Product("Lamp","Home",30,35);
-		Product home2 = new Product("Shower","Home",60,20);         
-		Product home3 = new Product("Door","Home",10,30);
+		User user1 = new User("Santiago","santiago@gmail.es","qwerty");
+		User user2 = new User("Liam","Liam@gmail.es","123456");
+		User user3 = new User("James","James@gmail.es","abc123");
+		User user4 = new User("Lucas","Lucas@gmail.es","passw0rd");
+
+		user1.addFounds(100);
+		user2.addFounds(25);
+		user3.addFounds(40);
+		user4.addFounds(75);
 		
-		Product music1 = new Product("The now now","Music",30,15);
-		Product music2 = new Product("Blurry face","Music",12,15);
-		Product music3 = new Product("Joytime II", "Music",14,15);
+		User logUser = null;
 		
-		
-		User test = new User("Santiago","santiago@gmail.es","qwerty",100);
+		while(true) {
+			boolean exit = false;
+			String user;
+			String pass;
+			System.out.print("Product Manger \nLogin \nUsername : ");
+			user = askString();
+			System.out.println("Pass : ");
+			pass = askString();
+			
+			if(User.getUser(user,pass) != null) {
+				exit=true;
+				logUser = User.getUser(user,pass);
+			}
+			if(exit) {
+				break;
+			}
+			
+		}
 		
 		
 		while(true) {			
 			boolean exit = false;
 			int input;
-			System.out.println("Menu \n1: Category List \n2: Show All Products \n3: Compare Products \n4: Profile \n5: Log Out");
+			System.out.println("Menu \n1: Category List \n2: Show All Products \n3: Profile \n4: Log Out");
 			input = askNumber();
 			
 			switch(input) {
 			case 1:
 				//Category List
-				subMenuCategoryList(test);
+				subMenuCategoryList(logUser);
 				break;
 				
 			case 2:
-				subMenuAllProducts(test);
+				subMenuAllProducts(logUser);
 				break;
 				
 			case 3:
-				subMenuCompareProducts();
+				subMenuProfile(logUser);
 				break;
 				
 			case 4:
-				subMenuProfile(test);
-				break;
-				
-			case 5:
 				exit = true;
 				break;
 			}
@@ -209,6 +241,5 @@ public class Main {
 			waitForInput();
 		}
 	}
-	// To Fix: don't return Lists;
 	// To Add: password Manager; the dollars; some file manager; test functions
 }
