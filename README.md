@@ -1,5 +1,5 @@
 # Product Manager
-
+## Description
 This program allows for the storage of different products under the index of categories.
 
 every user can have a personal profile with name, credentials, wallet and list of bought products.
@@ -28,27 +28,26 @@ and some methods to manipulate the products like A boolean to check if there is 
 
 **Class User**
 
-Contains user information, name, Email, password, wallet. List of products that the user has bought and also a list of all the users created.
-
+Contains user information, name, Email, password, wallet. List of products that the user has bought and also a list of all the users created. 
 Methods for manipulating information of the user like purchasing products and adding founds.
 
 The Password is not saved in plain text is encrypted using a function that doesn't do much but is better than nothing, before storing the password is encrypted using this function.
 
 ```
-	static private String encriptText(String text){
-		int aux = 0;
-		char[] rLetters = {'N','C','Y','E','C','L','X','N'};
-		int letterSelect = 0;
-		char[] ch = text.toCharArray();
-		for (int i = 0; i < text.length();i++) {
-			aux += ch[i] * i + 1 + i;
-		}
-		letterSelect = aux % 8;
-		return (Integer.toString(aux)+rLetters[letterSelect]);
+static private String encriptText(String text){
+	int aux = 0;
+	char[] rLetters = {'N','C','Y','E','C','L','X','N'};
+	int letterSelect = 0;
+	char[] ch = text.toCharArray();
+	for (int i = 0; i < text.length();i++) {
+		aux += ch[i] * i + 1 + i;
 	}
+	letterSelect = aux % 8;
+	return (Integer.toString(aux)+rLetters[letterSelect]);
+}
 
 ```
-And when is the time to verify the password at the time of login the string is input by the user and compare to the stored value, the password is never stored in the program.
+the code will convert a password  `encriptText("qwerty")` to `"1753C"` another string. And when is the time to verify the password at the time of login the string is input by the user and compare to the stored value, the password is never stored in the program.
 
 ## Development
 
