@@ -1,5 +1,7 @@
 package manager;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -56,6 +58,26 @@ public class Main {
 		if(input == 1 ) {
 			if(id.Purchase(actualProduct)) {
 				System.out.println("Product Purchase successfully");
+				
+				//if the purchase is done successfully it logs it on a csv file
+				FileWriter write = null;
+				try {
+					write = new FileWriter("Purchased.csv",true);
+					String w = id.toString()+";"+actualProduct.toString()+"\r\n";
+					write.write(w);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}finally {
+					
+					try {
+						write.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				
 			}else {
 				System.out.println("Product Purchase Faliaure");
 			}
@@ -77,7 +99,7 @@ public class Main {
 	
 	static void printProducts(Category category) {
 		for (int i = 0; i < category.getProductList().size();i++) {
-			System.out.println(i+1 + ": " + category.getProductList().get(i).getName());
+			System.out.println(i + 1 + ": " + category.getProductList().get(i).getName());
 		}
 	}
 	
@@ -146,10 +168,9 @@ public class Main {
  		}
  	}
  	
- 	
  	//main
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MyException {
 		
 		Category book = new Category("Book");
 		Category video = new Category("Video");
@@ -173,6 +194,7 @@ public class Main {
 		new Product("Blurry face","Music",12,15);
 		new Product("Joytime II", "Music",14,15);
 		
+		User user0 = new User("Borja","borja@gmail.es","PornLOLI");
 		User user1 = new User("Santiago","santiago@gmail.es","qwerty");
 		User user2 = new User("Liam","Liam@gmail.es","123456");
 		User user3 = new User("James","James@gmail.es","abc123");
@@ -234,5 +256,4 @@ public class Main {
 			waitForInput();
 		}
 	}
-//Add:	to dollars, ficheros , test para todas la claes, exceptions , herencia
 }

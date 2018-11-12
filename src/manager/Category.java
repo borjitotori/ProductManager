@@ -6,7 +6,7 @@ public class Category {
 	//Values
 	private static List<Category> categoryList = new ArrayList<Category>();
 	private String name;
-	private List<Product> productList= new ArrayList<Product>();
+	private List<Product> productList = new ArrayList<Product>();
 	//maybe related categories
 	
 	//constructor
@@ -37,7 +37,6 @@ public class Category {
 		return productList;
 	}
 	
-	
 	//set values
 	void setName(String new_name) {
 		name = new_name;
@@ -49,7 +48,6 @@ public class Category {
 		
 	}
 	
-	
 	//methods
 	static Category getCategory(String name) {
 		Category search = null;
@@ -60,7 +58,6 @@ public class Category {
 			}
 			
 		}
-		
 		return search;
 	}
 	
@@ -74,8 +71,5 @@ public class Category {
 		}
 		return search;
 	}
-	
-
-	
 	
 }

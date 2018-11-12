@@ -4,7 +4,7 @@ import org.junit.Test;
 public class CodeText {
 
 	@Test
-	public void testProgram() {
+	public void testProgram() throws MyException {
 		//check for correct construction of product
 		Category testCategory = new Category("testing");
 		
@@ -18,5 +18,7 @@ public class CodeText {
 		//check for the password encryption to be stable (always same output)
 		assertEquals(User.encript("qwerty123"),User.encript("qwerty123"));
 		
+		
+		//
 	}
 }

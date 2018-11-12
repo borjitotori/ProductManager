@@ -26,12 +26,8 @@ public class User {
 		//creates the csv file with the users
 		try {
 			write = new FileWriter("User.csv",true);
-			write.write(this.getName());
-			write.write(";");
-			write.write(this.getEmail());
-			write.write(";");
-			write.write(this.password);
-			write.write("\r\n");
+			String w = this.getName()+";"+this.getEmail()+";"+this.password+"\r\n";
+			write.write(w);
 		}catch(Exception e){
 			e.getCause();
 		}finally {
@@ -43,6 +39,7 @@ public class User {
 		}
 	}
 	//get values
+	
 	static User getUser(String in_Email, String in_Password) {
 		User aux = null;
 		for (int i=0;i<UserList.size();i++) {
@@ -55,6 +52,10 @@ public class User {
 			}
 		}
 		return aux;
+	}
+
+	public String toString() {
+		return (this.Email);
 	}
 	
 	String getName() {
