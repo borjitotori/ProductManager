@@ -14,7 +14,11 @@ public class Product {
 	Product(String new_name, String new_category, int new_stock, int new_price){
 		//check for another product called the same
 		name = new_name;
-		stock = new_stock;
+		if (stock >= 0) {
+			stock = new_stock;
+		}else {
+			stock = 0;
+		}
 		price = new_price;
 		productList.add(this);
 		productCategory = Category.getCategory(new_category);
@@ -51,8 +55,13 @@ public class Product {
 	
 	//set values
 	void setNewPrice(int new_price) {
-		price = new_price;
+		if (new_price >= 0) {
+			price = new_price;
+		}else {
+			price = 0;
+		}
 	}
+	
 	
 	//methods
 	boolean stockAvailable() {

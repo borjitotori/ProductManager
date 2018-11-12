@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Main {
 	// Input Functions
-
 	
 	static int askNumber() {
 		Scanner scM;
@@ -35,6 +34,7 @@ public class Main {
 	
 	static String askString() {
 		String input;
+		@SuppressWarnings("resource")
 		Scanner scM = new Scanner(System.in);
 		input = scM.nextLine();
 		
@@ -135,19 +135,17 @@ public class Main {
 		}
 	}
 	
- 	static void subMenuCompareProducts() {
-	}
-	
  	static void subMenuProfile(User id) {
  		System.out.println("Name: "+ id.getName() + " Email: "+id.getEmail() + " Wallet: "+id.getWallet()+"€");
- 		System.out.println("Purchased Products");
+ 		System.out.println("Purchased Products-----");
  		for (int i = 0; i< id.getListSize();i++) {
  			if(id.getPurchaseList().get(i) != null) {
- 				System.out.println(id.getPurchaseList().get(i).getCategory() + ": "+id.getPurchaseList().get(i).getName());
+ 				System.out.print(id.getPurchaseList().get(i).getCategory() + ": "+id.getPurchaseList().get(i).getName());
  			}
  			System.out.println();
  		}
  	}
+ 	
  	
  	//main
 	@SuppressWarnings("unused")
@@ -175,7 +173,6 @@ public class Main {
 		new Product("Blurry face","Music",12,15);
 		new Product("Joytime II", "Music",14,15);
 		
-		
 		User user1 = new User("Santiago","santiago@gmail.es","qwerty");
 		User user2 = new User("Liam","Liam@gmail.es","123456");
 		User user3 = new User("James","James@gmail.es","abc123");
@@ -190,11 +187,10 @@ public class Main {
 		
 		while(true) {
 			boolean exit = false;
-			String user;
-			String pass;
+			String user , pass;
 			System.out.print("Product Manger \nLogin \nUsername : ");
 			user = askString();
-			System.out.println("Pass : ");
+			System.out.print("Pass : ");
 			pass = askString();
 			
 			if(User.getUser(user,pass) != null) {
@@ -204,7 +200,6 @@ public class Main {
 			if(exit) {
 				break;
 			}
-			
 		}
 		
 		
@@ -233,13 +228,11 @@ public class Main {
 				break;
 			}
 			
-
 			if(exit) {
 				break;
 			}
-			
 			waitForInput();
 		}
 	}
-	// To Add: password Manager; the dollars; some file manager; test functions
+//Add:	to dollars, ficheros , test para todas la claes, exceptions , herencia
 }

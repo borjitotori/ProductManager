@@ -16,7 +16,7 @@ public class CodeText {
 		assertEquals(p1.getCategory(),testCategory.getName());
 		
 		//check for the password encryption to be stable (always same output)
-		assertEquals(User.encriptText("qwerty123"),User.encriptText("qwerty123"));
+		assertEquals(User.encript("qwerty123"),User.encript("qwerty123"));
 		
 	}
 }

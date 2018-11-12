@@ -1,10 +1,12 @@
 package manager;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
 	//Values
+	private static FileWriter write = null;
 	private static  List<User> UserList = new ArrayList<User>();
 	private String name;
 	private String Email;
@@ -20,8 +22,25 @@ public class User {
 		Email = new_Email;
 		password = encript(new_password);
 		UserList.add(this);
-		
 		System.out.println(password);
+		//creates the csv file with the users
+		try {
+			write = new FileWriter("User.csv",true);
+			write.write(this.getName());
+			write.write(";");
+			write.write(this.getEmail());
+			write.write(";");
+			write.write(this.password);
+			write.write("\r\n");
+		}catch(Exception e){
+			e.getCause();
+		}finally {
+			try {
+			write.close();
+			}catch(Exception e){
+				e.getMessage();
+			}
+		}
 	}
 	//get values
 	static User getUser(String in_Email, String in_Password) {
@@ -67,7 +86,7 @@ public class User {
 	
 	//methods
 	
-	static private String encript(String text){
+	static String encript(String text){
 		int aux = 0;
 		char[] rLetters = {'N','C','Y','E','C','L','X','N'};
 		int letterSelect = 0;
