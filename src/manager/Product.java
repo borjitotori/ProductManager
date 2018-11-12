@@ -11,19 +11,27 @@ public class Product {
 	private int price = 0;
 	
 	//constructor
-	Product(String new_name, String new_category, int new_stock, int new_price){
-		//check for another product called the same
+	Product(String new_name, String new_category, int new_stock, int new_price) throws MyException{
+		
+		//set the name
 		name = new_name;
-		if (stock >= 0) {
-			stock = new_stock;
-		}else {
-			stock = 0;
-		}
-		price = new_price;
+
+		//set the stock and price
+		this.setNewStock(new_stock);
+		
+		this.setNewPrice(new_price);
+
+		//add the product to the list of all products
 		productList.add(this);
-		productCategory = Category.getCategory(new_category);
-		if(productCategory != null) {
-			productCategory.addProduct(this);
+		
+		//set the category of the product
+		Category auxCategory = null;
+		auxCategory = Category.getCategory(new_category);
+		
+		if(auxCategory == null) {
+			throw new MyException("Category doesn't exist");
+		}else {
+			productCategory = Category.getCategory(new_category);
 		}
 	}
 	
@@ -62,7 +70,13 @@ public class Product {
 		}
 	}
 	
-	
+	void setNewStock(int new_Stock) {
+		if (new_Stock >= 0) {
+			stock = new_Stock;
+		}else {
+			stock = 0;
+		}
+	}
 	//methods
 	boolean stockAvailable() {
 		return (stock > 0);

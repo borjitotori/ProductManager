@@ -4,7 +4,7 @@ import org.junit.Test;
 public class CodeText {
 
 	@Test
-	public void testProgram() {
+	public void testProgram() throws MyException {
 		//check for correct construction of product
 		Category testCategory = new Category("testing");
 		

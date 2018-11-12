@@ -146,10 +146,9 @@ public class Main {
  		}
  	}
  	
- 	
  	//main
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MyException {
 		
 		Category book = new Category("Book");
 		Category video = new Category("Video");
@@ -171,8 +170,9 @@ public class Main {
 		
 		new Product("The now now","Music",30,15);
 		new Product("Blurry face","Music",12,15);
-		new Product("Joytime II", "Music",14,15);
+		new Product("Joytime II", "Musi",14,15);
 		
+		User user0 = new User("Borja","borja@gmail.es","PornLOLI");
 		User user1 = new User("Santiago","santiago@gmail.es","qwerty");
 		User user2 = new User("Liam","Liam@gmail.es","123456");
 		User user3 = new User("James","James@gmail.es","abc123");
@@ -234,5 +234,5 @@ public class Main {
 			waitForInput();
 		}
 	}
-//Add:	to dollars, ficheros , test para todas la claes, exceptions , herencia
+//Add:	to dollars, ficheros, exeptions, herencia
 }
