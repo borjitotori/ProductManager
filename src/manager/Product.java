@@ -32,10 +32,15 @@ public class Product {
 			throw new MyException("Category doesn't exist");
 		}else {
 			productCategory = Category.getCategory(new_category);
+			productCategory.getProductList().add(this);
 		}
 	}
 	
 	//get values
+	public String toString() {
+		return name;
+	}
+	
 	String getName() {
 		return name;
 	}

@@ -54,3 +54,20 @@ the code will convert a password  `encriptText("qwerty")` to `"1753C"` another s
 In the development of the project most difficulties arrive from the fact that I didn't have access to a GUI so I had to manage to make a somewhat usable menu.
 
 in respects to the hours expended is hard to say because of the nature of how I code this program, I had it open in the background and when I got some motivations I would write some lines, if I had to estimate a time frame I would say that it took around 4h scatter over a couple weeks.
+
+## version 2.0
+
+**Overwrite**
+
+In some classes such as the User and Product the function `toString()` was overwrite to take advantage of the functionality that it provides.
+
+
+**Files**
+
+Now the program supports the creation of csv files when new users are register in the page with their password encrypted and also the purchase made by every customer are logged out in another csv file.
+
+**Exceptions**
+
+An Exception Class was created to manage the moments that the program is unable to proceed , for example when the category is non existent.
+
+

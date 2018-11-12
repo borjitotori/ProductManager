@@ -18,5 +18,7 @@ public class CodeText {
 		//check for the password encryption to be stable (always same output)
 		assertEquals(User.encript("qwerty123"),User.encript("qwerty123"));
 		
+		
+		//
 	}
 }
